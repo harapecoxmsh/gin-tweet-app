@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"gin-tweet-app/dto"
 	"gin-tweet-app/services"
 	"net/http"
 
@@ -9,6 +10,7 @@ import (
 
 type IPostController interface {
 	FindAll(ctx *gin.Context)
+	Create(ctx *gin.Context)
 }
 
 type PostController struct {
@@ -26,4 +28,17 @@ func (c *PostController) FindAll(ctx *gin.Context) {
 		return
 	}
 	ctx.JSON(http.StatusOK, gin.H{"data": posts})
+}
+func (c *PostController) Create(ctx *gin.Context) {
+	var input dto.PostInput
+	if err := ctx.BindJSON(&input); err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	newPost, err := c.service.Create(input)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	ctx.JSON(http.StatusCreated, gin.H{"data": newPost})
 }

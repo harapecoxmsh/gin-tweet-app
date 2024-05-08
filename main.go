@@ -2,7 +2,7 @@ package main
 
 import (
 	"gin-tweet-app/controllers"
-	"gin-tweet-app/models"
+	"gin-tweet-app/infra"
 	"gin-tweet-app/repositories"
 	"gin-tweet-app/services"
 
@@ -10,15 +10,16 @@ import (
 )
 
 func main() {
-	contents := []models.Post{
-		{ID: 1, Content: "ginでX風アプリ開発中です"},
-		{ID: 2, Content: "頑張ります"},
-		{ID: 3, Content: "がんばれえええ"},
-	}
-	postRepository := repositories.NewPostMemoryRepository(contents)
+	infra.Initialize()
+	db := infra.SetupDB()
+
+	postRepository := repositories.NewPostRepository(db)
 	postService := services.NewPostService(postRepository)
 	postController := controllers.NewPostController(postService)
 	r := gin.Default()
-	r.GET("/posts", postController.FindAll)
+	itemRouter := r.Group("/posts")
+	itemRouter.GET("", postController.FindAll)
+	itemRouter.POST("", postController.Create)
+
 	r.Run("localhost:8080")
 }

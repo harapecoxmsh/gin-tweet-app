@@ -1,12 +1,14 @@
 package services
 
 import (
+	"gin-tweet-app/dto"
 	"gin-tweet-app/models"
 	"gin-tweet-app/repositories"
 )
 
 type IPostService interface {
 	FindAll() (*[]models.Post, error)
+	Create(postInput dto.PostInput) (*models.Post, error)
 }
 
 type PostService struct {
@@ -19,4 +21,10 @@ func NewPostService(repository repositories.IPostRepository) IPostService {
 
 func (s *PostService) FindAll() (*[]models.Post, error) {
 	return s.repository.FindAll()
+}
+func (s *PostService) Create(postInput dto.PostInput) (*models.Post, error) {
+	newPost := models.Post{
+		Content: postInput.Content,
+	}
+	return s.repository.Create(newPost)
 }
