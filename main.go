@@ -6,6 +6,7 @@ import (
 	"gin-tweet-app/repositories"
 	"gin-tweet-app/services"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -17,6 +18,7 @@ func main() {
 	postService := services.NewPostService(postRepository)
 	postController := controllers.NewPostController(postService)
 	r := gin.Default()
+	r.Use(cors.Default())
 	itemRouter := r.Group("/posts")
 	itemRouter.GET("", postController.FindAll)
 	itemRouter.POST("", postController.Create)
