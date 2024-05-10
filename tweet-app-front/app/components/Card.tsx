@@ -4,18 +4,19 @@ import {
     CardContent,
     CardFooter,
   } from "@/components/ui/card"
+  import PostData from '../types/type'
 
-const ContentCard = () => {
+interface PostDataProps {
+    post: PostData;
+}
+const ContentCard = ({post}: PostDataProps) => {
     
   return (
     <div>
     <Card>
         <CardContent>
-            <p>Card Contentxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+            <p>{post.content}</p>
         </CardContent>
-        <CardFooter>
-            <p>Card Footer</p>
-        </CardFooter>
     </Card>
     </div>
   )

@@ -6,14 +6,19 @@ import {
 
   } from "@/components/ui/card"
 import ContentCard from './Card'
+import PostData from '../types/type'
 
-const CardList = () => {
+interface PostAllDataProps {
+    posts: PostData[]
+}
+
+const CardList = ({posts}: PostAllDataProps) => {
 
   return (
     <div>
-    <ContentCard />
-    <ContentCard />
-    <ContentCard />
+    {posts.map((post: PostData) => (
+        <CardContent key={post.id} post={post}/>
+    ))}
     </div>
   )
 }
