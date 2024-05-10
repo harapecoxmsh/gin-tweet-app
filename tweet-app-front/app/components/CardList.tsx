@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
     Card,
     CardContent,
@@ -6,7 +6,9 @@ import {
 
   } from "@/components/ui/card"
 import ContentCard from './Card'
+
 const CardList = () => {
+
   return (
     <div>
     <ContentCard />
