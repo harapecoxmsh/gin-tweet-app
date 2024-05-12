@@ -10,7 +10,7 @@ interface PostDataProps {
     post: PostData;
 }
 const ContentCard = ({post}: PostDataProps) => {
-    
+
   return (
     <div>
     <Card>

@@ -13,7 +13,8 @@ import PostData from "./types/type";
 
 
 export default function Home() {
-  const [posts, setPosts] = useState(null)
+  const [posts, setPosts] = useState([])
+
   const API_URL = process.env.API_URL
   useEffect(() => {
     getPosts();
@@ -31,7 +32,7 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <CardList AllData={posts}/>
+      <CardList posts={posts}/>
     </main>
   );
 }
