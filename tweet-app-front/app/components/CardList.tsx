@@ -1,22 +1,23 @@
 import React from 'react';
 import PostData from '../types/type';
-import ContentCard from './Card'; // CardContentのインポートが必要かもしれません
+import ContentCard from './Card';
 
-interface PostAllDataProps {
-    posts: PostData[];
+interface AllPostDataProps {
+    AllPostData: PostData[];
 }
 
-const CardList: React.FC<PostAllDataProps> = (props) => {
-    const { posts } = props;
 
-    return (
-        <div>
-            {posts.map((post: PostData) => (
-                <ContentCard key={post.id} post={post}/>
-            ))}
-        </div>
-    );
+const CardList = ({AllPostData}: AllPostDataProps) => {
+  return (
+    <div>
+        {AllPostData.map((post: PostData) => (
+            <ContentCard key={post.id} post={post}/>
+        ))}
+
+    </div>
+  )
 }
 
-export default CardList;
+export default CardList
+
 

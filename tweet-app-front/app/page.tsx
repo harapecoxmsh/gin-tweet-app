@@ -1,38 +1,32 @@
-'use client'
+
 import {
   Card,
   CardContent,
   CardFooter,
 
 } from "@/components/ui/card"
-import CardList from "./components/CardList";
-import { useState, useEffect } from "react";
-import axios from "axios";
+
 import PostData from "./types/type";
+import CardList from "./components/CardList";
 
 
+const API_URL = process.env.API_URL
 
-export default function Home() {
-  const [posts, setPosts] = useState([])
+async function getAllPosts() {
+  const response = await fetch('http://localhost:8080/posts',{
+    cache: "no-store",
+  });
+  const AllPostData: PostData[] = await response.json();
+  console.log(AllPostData)
+  return AllPostData
+}
 
-  const API_URL = process.env.API_URL
-  useEffect(() => {
-    getPosts();
-  }, []);
-
-  const getPosts = () => {
-    axios.get(`${API_URL}/posts`)
-    .then((res) => res.data)
-    .then((data) => {
-        setPosts(data);
-    })
-    .catch((err) => alert(err));
-  };
-
-
+export default async function Home() {
+  const AllPostData = await getAllPosts();
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <CardList posts={posts}/>
+      <CardList AllPostData={AllPostData}/>
     </main>
   );
-}
+
+  }

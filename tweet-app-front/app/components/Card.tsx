@@ -7,10 +7,9 @@ import {
   import PostData from '../types/type'
 
 interface PostDataProps {
-    post: PostData;
+    post: PostData
 }
 const ContentCard = ({post}: PostDataProps) => {
-
   return (
     <div>
     <Card>

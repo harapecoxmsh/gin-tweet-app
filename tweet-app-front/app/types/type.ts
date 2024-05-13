@@ -1,8 +1,8 @@
 interface PostData {
-content: string;
-createdAt: Date;
-deletedAt: boolean;
-id: number;
-updatedAt: Date;
+    id: number;
+    createdAt: Date;
+    updatedAt: Date;
+    deletedAt: boolean;
+    content: string;
 }
 export default PostData
