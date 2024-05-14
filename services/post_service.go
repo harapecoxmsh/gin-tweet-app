@@ -8,7 +8,9 @@ import (
 
 type IPostService interface {
 	FindAll() (*[]models.Post, error)
+	FindByID(postId uint) (*models.Post, error)
 	Create(postInput dto.PostInput) (*models.Post, error)
+	Delete(postId uint) error
 }
 
 type PostService struct {
@@ -22,6 +24,15 @@ func NewPostService(repository repositories.IPostRepository) IPostService {
 func (s *PostService) FindAll() (*[]models.Post, error) {
 	return s.repository.FindAll()
 }
+
+func (s *PostService) FindById(postId uint) (*models.Post, error) {
+	return s.repository.FindByID(postId)
+}
+
+func (s *PostService) Delete(postId uint) error {
+	return s.repository.Delete(postId)
+}
+
 func (s *PostService) Create(postInput dto.PostInput) (*models.Post, error) {
 	newPost := models.Post{
 		Content: postInput.Content,
