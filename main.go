@@ -21,7 +21,9 @@ func main() {
 	r.Use(cors.Default())
 	itemRouter := r.Group("/posts")
 	itemRouter.GET("", postController.FindAll)
+	itemRouter.GET("/:id", postController.FindByID)
 	itemRouter.POST("", postController.Create)
+	itemRouter.DELETE("/:id", postController.Delete)
 
 	r.Run("localhost:8080")
 }

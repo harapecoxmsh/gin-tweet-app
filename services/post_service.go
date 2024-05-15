@@ -25,7 +25,7 @@ func (s *PostService) FindAll() (*[]models.Post, error) {
 	return s.repository.FindAll()
 }
 
-func (s *PostService) FindById(postId uint) (*models.Post, error) {
+func (s *PostService) FindByID(postId uint) (*models.Post, error) {
 	return s.repository.FindByID(postId)
 }
 
