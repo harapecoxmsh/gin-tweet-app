@@ -1,32 +1,19 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
-import axios from 'axios'
 import { PostData } from '../types/type'
+import Post from './Post'
 
-const Postlist = () => {
-    const [posts, setPosts] = useState<PostData[]>([])
 
-    useEffect(() => {
-        getPost();
-    }, []);
-
-    const getPost = () => {
-        axios.get("/posts")
-        .then((res) => res.data)
-        .then((data) => {
-            setPosts(data);
-            console.log(data);
-        })
-    }
+interface PostAllDataProps {
+    postAllData: PostData[]
+}
+const PostList = ({ postAllData }: PostAllDataProps) => {
   return (
     <div>
-        {posts.map((post: PostData) => (
-            <ul key={post.id}>
-                <li>{post.content}</li>
-            </ul>
-        ))}
+      {postAllData.map((post) => (
+        <Post post={post} key={post.ID} />
+      ))}
     </div>
   )
 }
 
-export default Postlist
+export default PostList
