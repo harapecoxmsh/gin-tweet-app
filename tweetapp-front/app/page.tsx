@@ -39,7 +39,7 @@ async function fetchPostData() {
 
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="flex min-h-screen flex-col items-center justify-between p-24 bg-cyan-400	background-color: rgb(34 211 238);">
         <PostList postAllData={postAllData} />
         <footer>
           <form onSubmit={createPost}>
